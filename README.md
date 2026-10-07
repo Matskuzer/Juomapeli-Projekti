@@ -1,5 +1,5 @@
 # JUOMAPELI — ryyppy peli(V1)
-Client-side digital drinking-game app (React + Vite + TypeScript + Tailwind + Lucide). One game: Hitler, a 52-card sip-based party game. No backend, accounts or storage. Drink responsibly; 18+.
+Client-side digital drinking-game app (React + Vite + TypeScript + Tailwind + Lucide). One game: Hitler, a 52-card sip-based party game. No backend, accounts or storage. Drink responsibly; 18+. Have Fun!
 
 ## Requirements
 Node.js 22.12.x, 24.x, or 26+ and npm.
