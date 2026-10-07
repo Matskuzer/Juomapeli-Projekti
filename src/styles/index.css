@@ -1,4 +1,4 @@
-@tailwind base;@tailwind components;@tailwind utilities;
+@import "tailwindcss";
 html,body,#root{min-height:100%}
 body{margin:0;background:radial-gradient(circle at 50% -10%,#3b0764 0,#0a0a0f 55%) fixed #0a0a0f;color:#fff;font-family:system-ui,-apple-system,sans-serif;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
 @keyframes flip{from{transform:rotateY(90deg) scale(.8);opacity:0}to{transform:none;opacity:1}}
