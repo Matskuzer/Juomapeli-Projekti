@@ -1,4 +1,4 @@
-# JUOMAPELI — Hitler (V1)
+# JUOMAPELI — Kkona (V1)
 Client-side digital drinking-game app (React + Vite + TypeScript + Tailwind + Lucide). One game: Hitler, a 52-card sip-based party game. No backend, accounts or storage. Drink responsibly; 18+.
 
 ## Requirements
