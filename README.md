@@ -1,4 +1,4 @@
-# JUOMAPELI — ryyppy peli(V1)
+# JUOMAPELI — Mene töihin(V1)
 Client-side digital drinking-game app (React + Vite + TypeScript + Tailwind + Lucide). One game: Hitler, a 52-card sip-based party game. No backend, accounts or storage. Drink responsibly; 18+. Have Fun!
 
 ## Requirements
@@ -20,4 +20,4 @@ Node.js 22.12.x, 24.x, or 26+ and npm.
 `dist/` is static (relative base path). Upload it to Netlify, Vercel, GitHub Pages, Cloudflare Pages or any static host.
 
 ## Structure
-`src/games/hitler/` holds types, deck, rules, pure logic and event UI, so another game can be added later under `src/games/`.
+`src/games/hitler/` holds types, deck, rules, pure logic and event UI, so another game can be added later under `src/games/`..
