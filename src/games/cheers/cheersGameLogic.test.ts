@@ -1,9 +1,9 @@
 import {describe,it,expect} from 'vitest';
-import {createDeck} from './hitlerCards';
-import {createGame,drawCard,endEvent,setPartner,canPick,currentPlayerId,addRule,rankReactions} from './hitlerGameLogic';
-import {eventFor,withPartners} from './hitlerRules';
+import {createDeck} from './cheersCards';
+import {createGame,drawCard,endEvent,setPartner,canPick,currentPlayerId,addRule,rankReactions} from './cheersGameLogic';
+import {eventFor,withPartners} from './cheersRules';
 const ps=['a','b','c'].map(n=>({id:n,name:n,gender:'unspecified' as const}));
-describe('hitler logic',()=>{
+describe('Cheers logic',()=>{
  it('deck has 52 unique cards',()=>{const d=createDeck();expect(d.length).toBe(52);expect(new Set(d.map(c=>c.id)).size).toBe(52);});
  it('drawing removes a card',()=>{const g=drawCard(createGame(ps));expect(g.deck.length).toBe(51);expect(g.deck.find(c=>c.id===g.currentCard!.id)).toBeUndefined();});
  it('turns rotate; game ends after 52 unique cards',()=>{let g=createGame(ps);const seen=new Set<string>();for(let i=0;i<52;i++){const first=currentPlayerId(g);g=drawCard(g);seen.add(g.currentCard!.id);g=endEvent(g);if(i<51)expect(currentPlayerId(g)).not.toBe(first);}expect(seen.size).toBe(52);expect(g.status).toBe('over');});
@@ -23,6 +23,16 @@ describe('hitler logic',()=>{
   const eliminationCategory={id:'9♠',rank:'9' as const,suit:'♠' as const};
   expect(eventFor({...g,currentCard:normalCategory},player)).toEqual({type:'category',mode:'normal',category:null,remaining:ps.length,phase:'choose',penalty:0});
   expect(eventFor({...g,currentCard:eliminationCategory},player)).toEqual({type:'category',mode:'elimination',category:null,remaining:ps.length,phase:'choose',penalty:0});
+ });
+ it('uses Cheers for 4 and 5, and counting for 6',()=>{
+  const g=createGame(ps);
+  const player=currentPlayerId(g);
+  const four={id:'4♠',rank:'4' as const,suit:'♠' as const};
+  const five={id:'5♠',rank:'5' as const,suit:'♠' as const};
+  const six={id:'6♠',rank:'6' as const,suit:'♠' as const};
+  expect(eventFor({...g,currentCard:four},player)).toEqual({type:'cheers',phase:'countdown',startedAt:0});
+  expect(eventFor({...g,currentCard:five},player)).toEqual({type:'cheers',phase:'countdown',startedAt:0});
+  expect(eventFor({...g,currentCard:six},player)).toEqual({type:'counting',i:0});
  });
  it('starts a timed DJ round on 10',()=>{
   const g=createGame(ps);

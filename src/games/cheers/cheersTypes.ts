@@ -10,7 +10,7 @@ export type GameEvent=
  |{type:'waterfall';done:string[]}
  |{type:'pick';purpose:'two'|'partner'|'king'}
  |{type:'result';title:string;note?:string;drinks:Drink[]}
- |{type:'hitler';phase:'countdown'|'go'|'results';startedAt:number}
+ |{type:'cheers';phase:'countdown'|'go'|'results';startedAt:number}
  |{type:'counting';i:number}
  |{type:'category';mode:'normal'|'elimination';category:string|null;remaining:number;phase:'choose'|'play'|'penalty';penalty:number}
  |{type:'dj';phase:'ready'|'playing'|'results';playerId:string;startedAt:number;songGuesser:string|null;artistGuesser:string|null;timedOut:boolean}

@@ -1,11 +1,11 @@
-import type {Rank,Drink,GameState,GameEvent} from './hitlerTypes';
+import type {Rank,Drink,GameState,GameEvent} from './cheersTypes';
 export const RULE_INFO:Record<Rank,{name:string;text:string}>={
  A:{name:'Waterfall',text:'Everyone drinks together, one at a time.'},
  '2':{name:'You choose',text:'Pick someone to drink 2 sips.'},
  '3':{name:'You drink',text:'Take 3 sips.'},
- '4':{name:'HITLER',text:'Everyone shouts “HITLER!” Slowest drinks 3.'},
- '5':{name:'Counting',text:'1 sip, 2 sips, 3 sips... around the circle.'},
- '6':{name:'Women',text:'Players marked Female drink 3 sips.'},
+ '4':{name:'Cheers',text:'Everyone shouts “Cheers!” Slowest drinks 3.'},
+ '5':{name:'Cheers',text:'Everyone shouts “Cheers!” Slowest drinks 3.'},
+ '6':{name:'Counting',text:'1 sip, 2 sips, 3 sips... around the circle.'},
  '7':{name:'Category',text:'Take turns naming things in a category. First person who gets stuck drinks 3 sips.'},
  '8':{name:'Make a rule',text:'Invent a rule. Breaking it = 3 sips.'},
  '9':{name:'Elimination category',text:'First person who gets one wrong drinks the most; each next elimination drinks one less.'},
@@ -27,9 +27,9 @@ export function eventFor(s:GameState,cur:string):GameEvent{
   case 'A':return {type:'waterfall',done:[]};
   case '2':return {type:'pick',purpose:'two'};
   case '3':return res('You drink',[cur]);
-  case '4':return {type:'hitler',phase:'countdown',startedAt:0};
-  case '5':return {type:'counting',i:0};
-  case '6':{const ids=s.players.filter(p=>p.gender==='female').map(p=>p.id);return res('Women drink',ids,ids.length?undefined:'Nobody is marked Female.');}
+  case '4':
+  case '5':return {type:'cheers',phase:'countdown',startedAt:0};
+  case '6':return {type:'counting',i:0};
   case '7':return {type:'category',mode:'normal',category:null,remaining:s.players.length,phase:'choose',penalty:0};
   case '8':return {type:'rule'};
   case '9':return {type:'category',mode:'elimination',category:null,remaining:s.players.length,phase:'choose',penalty:0};
