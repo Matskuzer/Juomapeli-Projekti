@@ -1,7 +1,7 @@
 import {describe,it,expect} from 'vitest';
-import {createDeck} from '../hitler/hitlerCards';
+import {createDeck} from '../cheers/cheersCards';
 import {chooseDealer,createHigherLowerGame,guessRank,isRankComplete,nextHigherLowerRound,rankValue} from './higherLowerGameLogic';
-import type {Player} from '../hitler/hitlerTypes';
+import type {Player} from '../cheers/cheersTypes';
 
 const players:Player[]=['a','b','c'].map(id=>({id,name:id,gender:'unspecified'}));
 const orderedDeck=()=>createDeck();

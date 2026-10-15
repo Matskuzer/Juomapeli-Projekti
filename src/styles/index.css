@@ -3,5 +3,5 @@ html,body,#root{min-height:100%}
 body{margin:0;background:radial-gradient(circle at 50% -10%,#3b0764 0,#0a0a0f 55%) fixed #0a0a0f;color:#fff;font-family:system-ui,-apple-system,sans-serif;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
 @keyframes flip{from{transform:rotateY(90deg) scale(.8);opacity:0}to{transform:none;opacity:1}}
 @keyframes pop{from{transform:scale(.9) translateY(10px);opacity:0}to{transform:none;opacity:1}}
-@keyframes glow{0%,100%{box-shadow:0 0 30px -5px #ef4444}50%{box-shadow:0 0 70px 5px #ef4444}}
+@keyframes glow{0%,100%{box-shadow:0 0 10px -6px #b91c1c}50%{box-shadow:0 0 24px -5px #b91c1c}}
 .flip{animation:flip .5s ease-out}.pop{animation:pop .3s ease-out}.glow{animation:glow .8s infinite}

@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import {ArrowLeft} from 'lucide-react';
-import type {Player,Rank} from '../hitler/hitlerTypes';
-import {RANKS} from '../hitler/hitlerTypes';
+import type {Player,Rank} from '../cheers/cheersTypes';
+import {RANKS} from '../cheers/cheersTypes';
 import {Btn,Reminder} from '../../components/ui';
-import {PlayingCard} from '../hitler/components/PlayingCard';
+import {PlayingCard} from '../cheers/components/PlayingCard';
 import {chooseDealer,createHigherLowerGame,guessRank,isRankComplete,nextHigherLowerRound,rankValue} from './higherLowerGameLogic';
 
 const GUESS_RANKS=RANKS as readonly Rank[];

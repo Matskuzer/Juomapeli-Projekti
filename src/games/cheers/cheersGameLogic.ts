@@ -1,6 +1,6 @@
-import {createDeck,shuffle} from './hitlerCards';
-import {eventFor} from './hitlerRules';
-import type {GameState,GameEvent,Player,KingMode} from './hitlerTypes';
+import {createDeck,shuffle} from './cheersCards';
+import {eventFor} from './cheersRules';
+import type {GameState,GameEvent,Player,KingMode} from './cheersTypes';
 export const MIN_PLAYERS=3;
 export function createGame(players:Player[],rnd:()=>number=Math.random,kingMode:KingMode='cup'):GameState{
  return {players,playerOrder:shuffle(players.map(p=>p.id),rnd),turn:0,deck:shuffle(createDeck(),rnd),usedCards:[],currentCard:null,activeRules:[],activePartners:[],activeQuestionMaster:null,kingMode,status:'playing',kingCount:0,reactionTimes:{},event:null};

@@ -1,7 +1,7 @@
 import {useEffect,useState} from 'react';
-import type {GameState,GameEvent,Drink} from '../hitlerTypes';
-import {currentPlayerId,addRule,setPartner,orderedFrom} from '../hitlerGameLogic';
-import {withPartners} from '../hitlerRules';
+import type {GameState,GameEvent,Drink} from '../cheersTypes';
+import {currentPlayerId,addRule,setPartner,orderedFrom} from '../cheersGameLogic';
+import {withPartners} from '../cheersRules';
 import {Btn} from '../../../components/ui';
 type Set=(f:(s:GameState)=>GameState)=>void;
 interface P{s:GameState;set:Set;done:()=>void;nm:(id:string)=>string}
@@ -30,15 +30,13 @@ function Waterfall({s,nm,done}:P&{e:Ev<'waterfall'>}){
  return <div className="space-y-3"><Title>WATERFALL</Title><p className="text-center text-zinc-400">{nm(currentPlayerId(s))} starts. Drink around the room, one at a time. Stop whenever you want.</p>
  <Btn onClick={done}>Everyone finished — continue</Btn></div>;
 }
-function Hitler({set,done,e}:P&{e:Ev<'hitler'>}){
- const [c,setC]=useState(3);
+function Cheers({set,done,e}:P&{e:Ev<'cheers'>}){
  useEffect(()=>{if(e.phase!=='countdown')return;
-  if(c===0){const t=setTimeout(()=>set(x=>({...x,event:{type:'hitler',phase:'go',startedAt:performance.now()}})),600+Math.random()*1800);return()=>clearTimeout(t);}
-  const t=setTimeout(()=>setC(c-1),700);return()=>clearTimeout(t);},[c,e.phase]);
- if(e.phase==='countdown')return <div className="py-10 text-center"><p className="text-zinc-400">Everyone get ready — call it out when it appears!</p><div key={c} className="pop text-9xl font-black text-fuchsia-400">{c>0?c:'…'}</div></div>;
- if(e.phase==='go')return <div className="space-y-3"><div className="glow rounded-3xl bg-red-600 py-6 text-center text-5xl font-black">HITLER!</div><p className="text-center text-zinc-300">Call “HITLER!” aloud! The slowest person drinks 3 sips.</p>
-  <Btn onClick={()=>set(x=>x.event?.type==='hitler'?{...x,event:{...x.event,phase:'results'}}:x)}>Round finished — continue</Btn></div>;
- return <div className="pop space-y-3"><Title>HITLER!</Title><p className="text-center text-xl font-black text-fuchsia-400">The slowest person drinks 3 sips.</p><Btn onClick={done}>Continue</Btn></div>;
+  const t=setTimeout(()=>set(x=>({...x,event:{type:'cheers',phase:'go',startedAt:performance.now()}})),1000);return()=>clearTimeout(t);},[e.phase]);
+ if(e.phase==='countdown')return <div className="py-10 text-center"><p className="text-zinc-400">Everyone get ready — call it out when it appears!</p><div className="pop text-9xl font-black text-fuchsia-400">1</div></div>;
+ if(e.phase==='go')return <div className="space-y-3"><div className="glow rounded-3xl bg-red-900 py-6 text-center text-5xl font-black">CHEERS!</div><p className="text-center text-zinc-300">Call “Cheers!” aloud! The slowest person drinks 3 sips.</p>
+  <Btn onClick={()=>set(x=>x.event?.type==='cheers'?{...x,event:{...x.event,phase:'results'}}:x)}>Round finished — continue</Btn></div>;
+ return <div className="pop space-y-3"><Title>CHEERS!</Title><p className="text-center text-xl font-black text-fuchsia-400">The slowest person drinks 3 sips.</p><Btn onClick={done}>Continue</Btn></div>;
 }
 function Counting({s,set,nm,e,done}:P&{e:Ev<'counting'>}){
  const order=orderedFrom(s);const last=e.i>=order.length-1;
@@ -100,7 +98,7 @@ export default function Events(p:P){
   case 'result':return <Result e={e} nm={p.nm} done={p.done}/>;
   case 'pick':return <Pick {...p} e={e}/>;
   case 'waterfall':return <Waterfall {...p} e={e}/>;
-  case 'hitler':return <Hitler {...p} e={e}/>;
+  case 'cheers':return <Cheers {...p} e={e}/>;
   case 'counting':return <Counting {...p} e={e}/>;
   case 'category':return <Category {...p} e={e}/>;
   case 'dj':return <DJ {...p} e={e}/>;

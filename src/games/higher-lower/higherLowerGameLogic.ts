@@ -1,6 +1,6 @@
-import {createDeck,shuffle} from '../hitler/hitlerCards';
-import {RANKS} from '../hitler/hitlerTypes';
-import type {Card,Player,Rank} from '../hitler/hitlerTypes';
+import {createDeck,shuffle} from '../cheers/cheersCards';
+import {RANKS} from '../cheers/cheersTypes';
+import type {Card,Player,Rank} from '../cheers/cheersTypes';
 
 export type Hint='higher'|'lower';
 export type Phase='chooseDealer'|'firstGuess'|'secondGuess'|'result'|'over';

@@ -1,18 +1,18 @@
 import {useState} from 'react';
-import {X,ScrollText,Link2,Trash2} from 'lucide-react';
-import type {Player,KingMode} from './hitlerTypes';
-import {createGame,drawCard,endEvent,currentPlayerId} from './hitlerGameLogic';
-import {RULE_INFO} from './hitlerRules';
+import {X,ScrollText,Link2,Trash2,ArrowRight} from 'lucide-react';
+import type {Player,KingMode} from './cheersTypes';
+import {createGame,drawCard,endEvent,currentPlayerId} from './cheersGameLogic';
+import {RULE_INFO} from './cheersRules';
 import {PlayingCard} from './components/PlayingCard';
 import Events from './components/Events';
 import {Btn,Reminder} from '../../components/ui';
-export default function HitlerGame({players,kingMode,onExit,onRestart}:{players:Player[];kingMode:KingMode;onExit:()=>void;onRestart:()=>void}){
+export default function CheersGame({players,kingMode,onExit,onRestart}:{players:Player[];kingMode:KingMode;onExit:()=>void;onRestart:()=>void}){
  const [s,setS]=useState(()=>createGame(players,Math.random,kingMode));
  const nm=(id:string)=>s.players.find(p=>p.id===id)?.name??'?';
  const cur=currentPlayerId(s);
  const done=()=>setS(endEvent);
  if(s.status==='over')return <div className="pop mx-auto flex min-h-screen max-w-md flex-col justify-center gap-4 p-6 text-center">
-  <h1 className="text-5xl font-black text-fuchsia-400">HITLER — GAME OVER</h1>
+  <h1 className="text-5xl font-black text-fuchsia-400">CHEERS — GAME OVER</h1>
   <div className="grid grid-cols-2 gap-3">{([['Cards played',s.usedCards.length],['Players',s.players.length],['Kings drawn',s.kingCount],['Active rules',s.activeRules.length]] as const).map(([k,v])=><div key={k} className="rounded-2xl bg-white/5 p-4"><div className="text-3xl font-black">{v}</div><div className="text-xs text-zinc-400">{k}</div></div>)}</div>
   <Btn onClick={onRestart}>Play again</Btn><Btn tone="ghost" onClick={onExit}>Edit players</Btn><Reminder/></div>;
  const info=s.currentCard&&RULE_INFO[s.currentCard.rank];
@@ -25,7 +25,7 @@ export default function HitlerGame({players,kingMode,onExit,onRestart}:{players:
     {s.activeRules.length>0&&<p className="rounded-xl bg-red-600/20 p-3 text-center font-bold uppercase text-red-300">Rule broken — 3 sips</p>}
    </section>
    <section className="space-y-2"><h3 className="font-bold text-rose-300">Partners</h3>
-    {s.activePartners.length===0?<p className="text-zinc-500">No partners yet.</p>:s.activePartners.map(([a,b])=><div key={`${a}-${b}`} className="flex items-center gap-2 rounded-xl bg-black/20 p-3"><Link2 size={16} className="shrink-0 text-rose-400"/><span>{nm(a)} <span className="text-zinc-500">+</span> {nm(b)}</span></div>)}
+    {s.activePartners.length===0?<p className="text-zinc-500">No partners yet.</p>:s.activePartners.map(([a,b])=><div key={`${a}-${b}`} className="flex items-center gap-2 rounded-xl bg-black/20 p-3"><Link2 size={16} className="shrink-0 text-rose-400"/><span className="flex items-center gap-2">{nm(a)} <ArrowRight aria-hidden="true" size={14} className="text-rose-400"/> {nm(b)}</span></div>)}
    </section>
   </aside>
   <main className="order-1 mx-auto flex min-h-screen w-full max-w-md flex-col gap-4 lg:order-2 lg:mx-0 lg:flex-1">
