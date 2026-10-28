@@ -1,5 +1,5 @@
 # JUOMAPELI — Mene töihin(V1)
-Digital card games built with React, Vite, TypeScript, Tailwind and Lucide. Includes King's Cup, Ravit (a horse-racing card game), Higher or Lower, and Bus Driver (Ride the Bus), a multiplayer card game with English and Finnish UI. Drink responsibly; 18+.
+Digital drinking games built with React, Vite, TypeScript, Tailwind and Lucide. Includes King's Cup, Ravit (a horse-racing card game), Higher or Lower, Bus Driver (Ride the Bus), a multiplayer card game with English and Finnish UI, and Case Opening, a username-based animated roulette game. Drink responsibly; 18+.
 
 ## Requirements
 Node.js 22.12.x, 24.x, or 26+ and npm.
@@ -17,7 +17,7 @@ The host can configure guess and pyramid penalties, equal-card handling, one-ver
 For separate processes, use `npm run server` and `npm run dev:web` in two terminals. Set `API_PORT` to change the room API port and `API_URL` to change the Vite proxy target. For deployment, host the Node API and configure the web server/reverse proxy to route `/api` to that API; the Vite build alone is a static client and does not provide multiplayer rooms.
 
 ## Testing
-`npm test` (Vitest, game logic tests under `src/games/` and for Bus Driver)
+`npm test` (Vitest, game logic tests under `src/games/`, including Case Opening and Bus Driver)
 
 ## Production build
 `npm run build` → output in `dist/` (`npm run preview` to check it)
@@ -26,4 +26,4 @@ For separate processes, use `npm run server` and `npm run dev:web` in two termin
 `dist/` is static (relative base path). Upload it to a static host and configure a reverse proxy/API deployment for `/api` to enable Bus Driver multiplayer.
 
 ## Structure
-`src/games/cheers/`, `src/games/ravit/`, and `src/games/higher-lower/` keep each game's logic, tests, and UI separate. `src/games/bus-driver/` contains the room UI; `shared/busGame.mjs` owns the server-validated rules and `server.mjs` provides the room API.
+`src/games/cheers/`, `src/games/ravit/`, `src/games/higher-lower/`, and `src/games/case-opening/` keep each game's logic, tests, and UI separate. `src/games/bus-driver/` contains the room UI; `shared/busGame.mjs` owns the server-validated rules and `server.mjs` provides the room API.

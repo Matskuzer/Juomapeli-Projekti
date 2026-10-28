@@ -1,7 +1,7 @@
-import {ArrowUpDown,BusFront,Flame,Trophy} from 'lucide-react';
+import {ArrowUpDown,BusFront,Flame,PackageOpen,Trophy} from 'lucide-react';
 import {Btn,Reminder} from '../components/ui';
 export type GameId='cheers'|'ravit'|'higher-lower';
-export default function Home({onStart,onBusDriver}:{onStart:(game:GameId)=>void;onBusDriver:()=>void}){
+export default function Home({onStart,onBusDriver,onCaseOpening}:{onStart:(game:GameId)=>void;onBusDriver:()=>void;onCaseOpening:()=>void}){
  const quit=()=>{window.close();if(!window.closed)window.alert('Your browser does not allow this app to close its tab. Close the tab manually to quit.');};
  return <div className="mx-auto flex min-h-screen max-w-md flex-col gap-8 p-6">
   <header className="pt-10 text-center"><h1 className="bg-gradient-to-r from-fuchsia-400 to-rose-500 bg-clip-text text-6xl font-black tracking-tight text-transparent">JUOMAPELI</h1><p className="mt-2 text-zinc-400">Digital drinking games for your group.</p></header>
@@ -17,6 +17,11 @@ export default function Home({onStart,onBusDriver}:{onStart:(game:GameId)=>void;
    <article className="pop relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-cyan-950/70 via-zinc-950 to-blue-950/50 p-6">
     <ArrowUpDown className="mb-4 text-cyan-300" size={36}/><h2 className="text-4xl font-black">HIGHER OR LOWER</h2>
     <p className="mb-6 mt-2 text-zinc-300">Guess a card's rank. Miss twice and the dealer passes the deck.</p><Btn tone="ghost" onClick={()=>onStart('higher-lower')}>Choose Higher or Lower</Btn>
+   </article>
+   <article className="pop rounded-3xl border border-violet-400/30 bg-gradient-to-br from-violet-950/70 via-zinc-950 to-fuchsia-950/50 p-6">
+    <PackageOpen className="mb-3 text-violet-300" size={34}/><h2 className="text-3xl font-black">CASE OPENING</h2>
+    <p className="mb-5 mt-2 text-zinc-300">Add your friends as skins, spin the case and see whose name lands.</p>
+    <Btn onClick={onCaseOpening} className="bg-gradient-to-r from-violet-700 to-fuchsia-700 shadow-none">Open the case</Btn>
    </article>
    <article className="pop rounded-3xl border border-cyan-400/30 bg-gradient-to-br from-cyan-950/70 via-zinc-950 to-blue-950/60 p-6">
     <BusFront className="mb-3 text-cyan-300" size={34}/><h2 className="text-3xl font-black">BUS DRIVER</h2>
