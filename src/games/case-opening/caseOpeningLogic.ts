@@ -40,12 +40,12 @@ export function createCaseRoll(players:CasePlayer[],random:()=>number=Math.rando
  return {items,winner:items[ROLL_STOP_INDEX]};
 }
 
-export const RARITY_STYLES:Record<Rarity,{label:string;frame:string;glow:string}>={
- standard:{label:'STANDARD',frame:'border-sky-400/70 bg-gradient-to-br from-sky-950 via-slate-900 to-slate-950',glow:'shadow-[0_0_24px_-8px_#38bdf8]'},
- rare:{label:'RARE',frame:'border-violet-400/70 bg-gradient-to-br from-violet-950 via-slate-900 to-slate-950',glow:'shadow-[0_0_24px_-8px_#a78bfa]'},
- epic:{label:'EPIC',frame:'border-fuchsia-400/70 bg-gradient-to-br from-fuchsia-950 via-slate-900 to-slate-950',glow:'shadow-[0_0_24px_-8px_#e879f9]'},
- legendary:{label:'LEGENDARY',frame:'border-rose-400/70 bg-gradient-to-br from-rose-950 via-slate-900 to-slate-950',glow:'shadow-[0_0_24px_-8px_#fb7185]'},
- mythic:{label:'MYTHIC',frame:'border-amber-300/80 bg-gradient-to-br from-amber-950 via-slate-900 to-slate-950',glow:'shadow-[0_0_30px_-8px_#fcd34d]'},
+export const RARITY_STYLES:Record<Rarity,{label:string;frame:string;glow:string;text:string}>={
+ standard:{label:'STANDARD',frame:'border-sky-300/80 bg-gradient-to-br from-sky-900 via-slate-900 to-slate-950',glow:'shadow-[0_0_24px_-8px_#7dd3fc]',text:'text-sky-300'},
+ rare:{label:'RARE',frame:'border-blue-600/80 bg-gradient-to-br from-blue-950 via-slate-900 to-slate-950',glow:'shadow-[0_0_24px_-8px_#2563eb]',text:'text-blue-400'},
+ epic:{label:'EPIC',frame:'border-pink-400/80 bg-gradient-to-br from-pink-950 via-slate-900 to-slate-950',glow:'shadow-[0_0_24px_-8px_#f472b6]',text:'text-pink-300'},
+ legendary:{label:'LEGENDARY',frame:'border-red-500/80 bg-gradient-to-br from-red-950 via-slate-900 to-slate-950',glow:'shadow-[0_0_24px_-8px_#ef4444]',text:'text-red-400'},
+ mythic:{label:'MYTHIC',frame:'border-yellow-300 bg-gradient-to-br from-yellow-500/40 via-yellow-950 to-slate-950',glow:'shadow-[0_0_38px_-4px_#facc15]',text:'text-yellow-300'},
 };
 
 export const CASE_RARITIES=RARITIES;

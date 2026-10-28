@@ -1,5 +1,5 @@
 import {useEffect,useRef,useState} from 'react';
-import {ArrowLeft,PackageOpen,Plus,Trash2} from 'lucide-react';
+import {ArrowLeft,PackageOpen,Plus,Sparkles,Trash2} from 'lucide-react';
 import {Btn,Reminder} from '../../components/ui';
 import {CASE_RARITIES,createCaseRoll,RARITY_ODDS,RARITY_STYLES,ROLL_STOP_INDEX} from './caseOpeningLogic';
 import type {CasePlayer,CaseRoll} from './caseOpeningLogic';
@@ -131,12 +131,12 @@ export default function CaseOpeningGame({onExit}:{onExit:()=>void}){
       {roll.items.map((skin,index)=>{
        const style=RARITY_STYLES[skin.rarity];
        const isSelected=index===ROLL_STOP_INDEX;
-       return <div ref={isSelected?winnerCardRef:undefined} key={index} className={`case-skin relative flex h-32 w-40 shrink-0 flex-col items-center justify-center overflow-hidden rounded-xl border ${style.frame} ${style.glow} ${isSpinning?'case-skin-spinning':''} ${winner&&isSelected?'case-skin-selected':''}`} style={isSpinning?{animationDelay:`${index%5*35}ms`}:undefined}>
+       return <div ref={isSelected?winnerCardRef:undefined} key={index} className={`case-skin case-rarity-${skin.rarity} relative flex h-32 w-40 shrink-0 flex-col items-center justify-center overflow-hidden rounded-xl border ${style.frame} ${style.glow} ${isSpinning?'case-skin-spinning':''} ${winner&&isSelected?'case-skin-selected':''}`} style={isSpinning?{animationDelay:`${index%5*35}ms`}:undefined}>
         <div className="pointer-events-none absolute inset-0 opacity-20" style={{backgroundImage:'repeating-linear-gradient(135deg,transparent 0 12px,rgba(255,255,255,.18) 12px 14px)'}}/>
         <div className={`case-skin-shine ${isSpinning?'case-skin-shine-active':''}`}/>
-        <span className="relative mb-2 grid size-12 place-items-center rounded-full border border-white/30 bg-black/30 text-xl font-black text-white/90">{skin.player.name.slice(0,2).toUpperCase()}</span>
+        <span className="case-skin-avatar relative mb-2 grid size-12 place-items-center rounded-full border border-white/30 bg-black/30 text-xl font-black text-white/90">{skin.player.name.slice(0,2).toUpperCase()}</span>
         <span className="relative max-w-[9rem] truncate px-2 text-center font-black text-white">{skin.player.name}</span>
-        <span className="relative mt-1 text-[9px] font-bold tracking-[.2em] text-white/60">{style.label}</span>
+        <span className="case-skin-rarity relative mt-1 text-[9px] font-bold tracking-[.2em]">{style.label}</span>
        </div>;
       })}
      </div>:<div className="flex h-40 items-center justify-center text-center text-sm text-zinc-500">{players.length<2?'Add at least two usernames to load the case.':'The case is ready. Spin to see who gets picked.'}</div>}
@@ -147,7 +147,7 @@ export default function CaseOpeningGame({onExit}:{onExit:()=>void}){
 
   {winner?<section aria-live="polite" className={`case-result case-result-${winner.rarity} pop relative overflow-hidden rounded-3xl border p-6 text-center`}>
    <div className="case-confetti" aria-hidden="true">{Array.from({length:12},(_,index)=><span key={index}/>)}</div>
-   <p className="case-drop-label relative text-xs font-black uppercase tracking-[.25em]">{RARITY_STYLES[winner.rarity].label} DROP</p>
+   <p className="case-drop-label relative flex items-center justify-center gap-2 text-xs font-black uppercase tracking-[.25em]">{winner.rarity==='mythic'&&<Sparkles size={16}/>} {winner.rarity==='mythic'?'MYTHIC JACKPOT':`${RARITY_STYLES[winner.rarity].label} DROP`} {winner.rarity==='mythic'&&<Sparkles size={16}/>}</p>
    <h2 className="case-winner-name relative mt-2 break-words text-4xl font-black">{winner.player.name}</h2>
    <p className="relative mt-3 text-lg text-zinc-100">{sipAmounts[winner.rarity]===0?'No sips this time — skip if you like.':`You landed on the case! Take ${sipAmounts[winner.rarity]} ${sipAmounts[winner.rarity]===1?'sip':'sips'}.`}</p>
   </section>:null}
@@ -163,7 +163,7 @@ export default function CaseOpeningGame({onExit}:{onExit:()=>void}){
     {CASE_RARITIES.map(rarity=>{
      const style=RARITY_STYLES[rarity];
      return <div key={rarity} className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[.03] px-3 py-2">
-      <span className={`text-xs font-black tracking-wider ${rarity==='standard'?'text-sky-300':rarity==='rare'?'text-violet-300':rarity==='epic'?'text-fuchsia-300':rarity==='legendary'?'text-rose-300':'text-amber-300'}`}>{style.label}</span>
+      <span className={`text-xs font-black tracking-wider ${style.text}`}>{style.label}</span>
       <span className="font-mono text-sm font-bold text-white">{RARITY_ODDS[rarity]}%</span>
      </div>;
     })}
@@ -173,7 +173,7 @@ export default function CaseOpeningGame({onExit}:{onExit:()=>void}){
    <p className="mb-3 mt-1 text-xs text-zinc-400">Choose the sip count for each drop. 0 means no sips.</p>
    <div className="space-y-2">
     {CASE_RARITIES.map(rarity=><label key={rarity} className="flex items-center justify-between gap-3 text-sm">
-     <span className="text-zinc-300">{RARITY_STYLES[rarity].label}</span>
+     <span className={RARITY_STYLES[rarity].text}>{RARITY_STYLES[rarity].label}</span>
      <span className="flex items-center gap-2">
       <input aria-label={`${RARITY_STYLES[rarity].label} sips`} type="number" min={0} max={MAX_SIPS} step={1} value={sipAmounts[rarity]} disabled={isSpinning} onChange={event=>{
        const amount=Number(event.currentTarget.value);

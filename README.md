@@ -1,4 +1,4 @@
-# JUOMAPELI — Mene töihin(V1)
+# Siply - Drinking Game
 Digital drinking games built with React, Vite, TypeScript, Tailwind and Lucide. Includes King's Cup, Ravit (a horse-racing card game), Higher or Lower, Bus Driver (Ride the Bus), a multiplayer card game with English and Finnish UI, and Case Opening, a username-based animated roulette game. Drink responsibly; 18+.
 
 ## Requirements
