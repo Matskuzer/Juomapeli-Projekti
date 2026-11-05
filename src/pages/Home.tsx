@@ -1,14 +1,14 @@
 import {ArrowUpDown,BusFront,Flame,PackageOpen,Trophy} from 'lucide-react';
 import {Reminder} from '../components/ui';
-export type GameId='cheers'|'ravit'|'higher-lower';
-export default function Home({onStart,onBusDriver,onCaseOpening}:{onStart:(game:GameId)=>void;onBusDriver:()=>void;onCaseOpening:()=>void}){
+export type GameId='cheers'|'ravit'|'higher-lower'|'bus';
+export default function Home({onStart,onCaseOpening}:{onStart:(game:GameId)=>void;onCaseOpening:()=>void}){
  const quit=()=>{window.close();if(!window.closed)window.alert('Your browser does not allow this app to close its tab. Close the tab manually to quit.');};
  const games=[
   {title:"King's Cup",description:"Draw cards, follow the rules and choose King's Cup or Big Sip.",icon:<Flame size={22}/>,theme:'border-fuchsia-400/20 bg-fuchsia-950/20 text-fuchsia-300 hover:border-fuchsia-400/40',action:()=>onStart('cheers'),label:"Play King's Cup"},
   {title:'Ravit',description:'Bet on a suit and race four aces to the finish.',icon:<Trophy size={22}/>,theme:'border-amber-400/20 bg-amber-950/20 text-amber-300 hover:border-amber-400/40',action:()=>onStart('ravit'),label:'Play Ravit'},
   {title:'Higher or Lower',description:"Guess the next card's rank. Miss twice and pass the deck.",icon:<ArrowUpDown size={22}/>,theme:'border-cyan-400/20 bg-cyan-950/20 text-cyan-300 hover:border-cyan-400/40',action:()=>onStart('higher-lower'),label:'Play Higher or Lower'},
   {title:'Case Opening',description:'Add your friends, open a case and see who gets picked.',icon:<PackageOpen size={22}/>,theme:'border-violet-400/20 bg-violet-950/20 text-violet-300 hover:border-violet-400/40',action:onCaseOpening,label:'Open a case'},
-  {title:'Bus Driver',description:'Play through the guesses, pyramid and final challenge together.',icon:<BusFront size={22}/>,theme:'border-cyan-400/20 bg-cyan-950/20 text-cyan-300 hover:border-cyan-400/40',action:onBusDriver,label:'Create or join a room'},
+  {title:'Bus Driver',description:'Play through the guesses, pyramid and final challenge together.',icon:<BusFront size={22}/>,theme:'border-cyan-400/20 bg-cyan-950/20 text-cyan-300 hover:border-cyan-400/40',action:()=>onStart('bus'),label:'Play Bus Driver'},
  ];
  return <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-5 py-7 sm:px-8 sm:py-10">
   <header className="border-b border-white/10 pb-5">

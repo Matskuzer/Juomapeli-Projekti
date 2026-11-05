@@ -28,7 +28,7 @@ export function createRoom(code, hostId, hostName) {
     hostId,
     status: 'lobby',
     players: [{ id: hostId, name: hostName, ready: false, penalties: 0, hand: [], guesses: [] }],
-    settings: { tieRule: 'incorrect', rowPoints: [1, 2, 3, 4, 5], challengeLength: 4, guessPenalty: 1, responseMode: 'sequential', turnOrder: 'forward', matchingRule: 'one' },
+    settings: { tieRule: 'incorrect', rowPoints: [1, 2, 3, 4, 5], challengeLength: 4, guessPenalty: 1, responseMode: 'sequential', turnOrder: 'forward', matchingRule: 'all' },
     deck: [],
     randomInt: null,
     deckNumber: 1,

@@ -23,6 +23,7 @@ describe('Bus Driver game rules',()=>{
   expect(deck).toHaveLength(52);
   expect(new Set(deck.map(card=>card.id)).size).toBe(52);
   expect(deck.find(card=>card.rank==='A'&&card.suit==='♠')).toBeDefined();
+  expect(createRoom('ABC234','a','Ari').settings.matchingRule).toBe('all');
  });
 
  it('allows a ready host to start a solo game, but rejects an unready host',()=>{
@@ -176,7 +177,6 @@ describe('Bus Driver game rules',()=>{
   const room=createRoom('ABC234','a','Ari');
   addPlayer(room,'b','Bea');
   room.status='pyramid';
-  room.settings.matchingRule='all';
   room.players[0].hand=[{id:'2♥',rank:'2',suit:'♥'},{id:'2♠',rank:'2',suit:'♠'}];
   room.players[1].hand=[{id:'3♥',rank:'3',suit:'♥'}];
   room.pyramid=[{id:'2♦',rank:'2',suit:'♦'},...cardsWithout('2♥','2♠','3♥','2♦').filter(card=>!['2','3'].includes(card.rank)).slice(0,14)];
