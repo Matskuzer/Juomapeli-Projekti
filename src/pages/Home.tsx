@@ -10,11 +10,17 @@ export default function Home({onStart,onCaseOpening,onPrivacyPolicy}:{onStart:(g
   {title:'Beer Opening',description:'Add your friends, spin the bottle and see who gets picked.',icon:<PackageOpen size={22}/>,theme:'border-violet-400/20 bg-violet-950/20 text-violet-300 hover:border-violet-400/40',action:onCaseOpening,label:'Play Beer Opening'},
   {title:'Bus Driver',description:'Play through the guesses, pyramid and final challenge together.',icon:<BusFront size={22}/>,theme:'border-cyan-400/20 bg-cyan-950/20 text-cyan-300 hover:border-cyan-400/40',action:()=>onStart('bus'),label:'Play Bus Driver'},
  ];
- return <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-5 py-7 sm:px-8 sm:py-10">
+ return <div className="relative isolate min-h-screen overflow-hidden">
+  <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden overflow-hidden xl:block">
+   <div className="absolute left-8 top-1/4 flex h-44 w-32 -rotate-12 items-center justify-center rounded-2xl border border-fuchsia-200/20 bg-gradient-to-br from-fuchsia-300/[.12] to-fuchsia-950/20 text-8xl text-fuchsia-100/45 shadow-[0_16px_50px_rgba(168,85,247,0.14)]">♠</div>
+   <div className="absolute right-8 top-1/4 flex h-44 w-32 rotate-12 items-center justify-center rounded-2xl border border-rose-200/20 bg-gradient-to-bl from-rose-300/[.12] to-rose-950/20 text-8xl text-rose-200/50 shadow-[0_16px_50px_rgba(244,63,94,0.14)]">♥</div>
+   <div className="absolute bottom-1/4 left-8 flex h-44 w-32 rotate-12 items-center justify-center rounded-2xl border border-rose-200/20 bg-gradient-to-tr from-rose-300/[.12] to-rose-950/20 text-8xl text-rose-200/50 shadow-[0_16px_50px_rgba(244,63,94,0.14)]">♦</div>
+   <div className="absolute bottom-1/4 right-8 flex h-44 w-32 -rotate-12 items-center justify-center rounded-2xl border border-fuchsia-200/20 bg-gradient-to-tl from-fuchsia-300/[.12] to-fuchsia-950/20 text-8xl text-fuchsia-100/45 shadow-[0_16px_50px_rgba(168,85,247,0.14)]">♣</div>
+  </div>
+  <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-5xl flex-col px-5 py-7 sm:px-8 sm:py-10">
   <header className="border-b border-white/10 pb-5">
-   <div className="flex flex-col items-start">
-    <span className="text-3xl font-black leading-none tracking-tight text-white sm:text-4xl">Kippix</span>
-    <span className="mt-1.5 text-[11px] font-semibold uppercase tracking-[.18em] text-fuchsia-300">Drinking Game</span>
+   <div className="flex items-center justify-center">
+    <img src="/kippix-full-logo.png" alt="KippiX" className="h-32 w-72 max-w-full shrink-0 object-contain drop-shadow-[0_0_18px_rgba(168,85,247,0.22)] sm:h-36 sm:w-80 md:h-40 md:w-[22rem]" />
    </div>
   </header>
   <section className="pb-7 pt-8 sm:pt-10">
@@ -38,5 +44,6 @@ export default function Home({onStart,onCaseOpening,onPrivacyPolicy}:{onStart:(g
     <button onClick={quit} className="rounded-lg px-3 py-2 transition-colors hover:bg-white/[.06] hover:text-zinc-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400">Quit</button>
    </div>
   </footer>
- </main>;
+  </main>
+ </div>;
 }
