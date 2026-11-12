@@ -1,5 +1,5 @@
-# Siply - Drinking Game
-Digital drinking games built with React, Vite, TypeScript, Tailwind and Lucide. Includes King's Cup, Ravit (a horse-racing card game), Higher or Lower, Bus Driver (Ride the Bus), a local pass-and-play card game with English and Finnish UI, and Case Opening, a username-based animated roulette game. Drink responsibly; 18+.
+# Kippix - Drinking Game
+Digital drinking games built with React, Vite, TypeScript, Tailwind and Lucide. Includes King's Cup, Ravit (a horse-racing card game), Higher or Lower, Bus Driver (Ride the Bus), a local pass-and-play card game with English and Finnish UI, and Beer Opening, a username-based animated roulette game. Drink responsibly; 18+.
 
 ## Requirements
 Node.js 22.12.x, 24.x, or 26+ and npm.
@@ -17,7 +17,7 @@ The host can configure guess and pyramid penalties, equal-card handling, one-ver
 For separate processes, use `npm run server` and `npm run dev:web` in two terminals. Set `API_PORT` to change the API port and `API_URL` to change the Vite proxy target.
 
 ## Testing
-`npm test` (Vitest, game logic tests under `src/games/`, including Case Opening and Bus Driver)
+`npm test` (Vitest, game logic tests under `src/games/`, including Beer Opening and Bus Driver)
 
 ## Production build
 `npm run build` → output in `dist/` (`npm run preview` to check it)
