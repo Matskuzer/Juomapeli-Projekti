@@ -1,5 +1,5 @@
 # Kippix - Drinking Game
-Digital drinking games built with React, Vite, TypeScript, Tailwind and Lucide. Includes King's Cup, Ravit (a horse-racing card game), Higher or Lower, Bus Driver (Ride the Bus), a local pass-and-play card game with English and Finnish UI, and Beer Opening, a username-based animated roulette game. Drink responsibly; 18+.
+Digital drinking games built with React, Vite, TypeScript, Tailwind and Lucide. Includes King's Cup, Ace Race (a horse-racing card game), Higher or Lower, Bus Driver (Ride the Bus), a local pass-and-play card game with English and Finnish UI, and Beer Opening, a username-based animated roulette game. Drink responsibly; 18+.
 
 ## Requirements
 Node.js 22.12.x, 24.x, or 26+ and npm.

@@ -48,7 +48,7 @@ export default function RavitGame({players,onExit,onRestart}:{players:Player[];o
   </main>}
 
   {state.status==='racing'&&<main className="pop flex flex-1 flex-col gap-4">
-   <div className="text-center"><p className="text-xs uppercase tracking-[.3em] text-amber-200">Ravit</p><h1 className="text-4xl font-black">The race</h1></div>
+   <div className="text-center"><p className="text-xs uppercase tracking-[.3em] text-amber-200">Ace Race</p><h1 className="text-4xl font-black">The race</h1></div>
    <section aria-label="Racetrack" className="space-y-2 rounded-3xl border border-amber-400/20 bg-gradient-to-br from-amber-950/60 to-zinc-950 p-4">
     <div className="mb-3 flex items-center justify-between"><p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Start</p><p className="flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-amber-200">Finish <Flag size={14}/></p></div>
     {SUITS.map(suit=><div key={suit} className="grid grid-cols-[2.75rem_minmax(0,1fr)] items-center gap-2">
