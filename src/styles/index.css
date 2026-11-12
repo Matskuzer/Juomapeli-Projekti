@@ -1,6 +1,7 @@
 @import "tailwindcss";
 html,body,#root{min-height:100%}
-body{margin:0;background:radial-gradient(circle at 50% -10%,#3b0764 0,#0a0a0f 55%) fixed #0a0a0f;color:#fff;font-family:system-ui,-apple-system,sans-serif;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+body{margin:0;background-color:#09080d;background-image:radial-gradient(ellipse at 50% -8%,rgba(119,40,205,.2),transparent 42%),radial-gradient(ellipse at 7% 42%,rgba(81,35,135,.11),transparent 30%),radial-gradient(ellipse at 92% 70%,rgba(117,40,190,.09),transparent 34%),radial-gradient(rgba(255,255,255,.025) .65px,transparent .65px);background-size:auto,auto,auto,5px 5px;background-attachment:fixed;color:#fff;font-family:Inter,Geist,Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:-.01em;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+.home-shell{background-color:#09080d;background-image:radial-gradient(ellipse at 50% -8%,rgba(119,40,205,.2),transparent 42%),radial-gradient(ellipse at 7% 42%,rgba(81,35,135,.11),transparent 30%),radial-gradient(ellipse at 92% 70%,rgba(117,40,190,.09),transparent 34%),radial-gradient(rgba(255,255,255,.025) .65px,transparent .65px);background-size:auto,auto,auto,5px 5px}
 @keyframes flip{from{transform:rotateY(90deg) scale(.8);opacity:0}to{transform:none;opacity:1}}
 @keyframes pop{from{transform:scale(.9) translateY(10px);opacity:0}to{transform:none;opacity:1}}
 @keyframes glow{0%,100%{box-shadow:0 0 10px -6px #b91c1c}50%{box-shadow:0 0 24px -5px #b91c1c}}
