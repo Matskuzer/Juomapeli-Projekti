@@ -10,14 +10,14 @@ export default function CheersGame({players,kingMode,onExit,onRestart}:{players:
  const [s,setS]=useState(()=>createGame(players,Math.random,kingMode));
  const nm=(id:string)=>s.players.find(p=>p.id===id)?.name??'?';
  const cur=currentPlayerId(s);
- const done=()=>setS(endEvent);
+ const done=()=>setS(s=>drawCard(endEvent(s)));
  if(s.status==='over')return <div className="pop mx-auto flex min-h-screen max-w-md flex-col justify-center gap-4 p-6 text-center">
   <h1 className="text-5xl font-black text-fuchsia-400">CHEERS — GAME OVER</h1>
-  <div className="grid grid-cols-2 gap-3">{([['Cards played',s.usedCards.length],['Players',s.players.length],['Kings drawn',s.kingCount],['Active rules',s.activeRules.length]] as const).map(([k,v])=><div key={k} className="rounded-2xl bg-white/5 p-4"><div className="text-3xl font-black">{v}</div><div className="text-xs text-zinc-400">{k}</div></div>)}</div>
+  <div className="grid grid-cols-2 gap-3">{([['Cards played',s.usedCards.length],['Players',s.players.length],['Kings drawn',s.kingCount],['Active rules',s.activeRules.length]] as const).map(([k,v])=><div key={k} className="rounded-2xl bg-white/5 p-4"><div className="text-3xl font-black">{v}</div><div className="text-sm text-zinc-400">{k}</div></div>)}</div>
   <Btn onClick={onRestart}>Play again</Btn><Btn tone="ghost" onClick={onExit}>Edit players</Btn><Reminder/></div>;
  const info=s.currentCard&&RULE_INFO[s.currentCard.rank];
  return <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-4 p-4 lg:flex-row lg:items-start">
-  <aside className="order-2 space-y-3 rounded-2xl bg-white/5 p-4 text-sm lg:order-1 lg:sticky lg:top-4 lg:w-72 lg:shrink-0">
+  <aside className="order-2 space-y-3 rounded-2xl bg-white/5 p-4 text-base lg:order-1 lg:sticky lg:top-4 lg:w-72 lg:shrink-0">
    <h2 className="text-lg font-black uppercase tracking-wide">Game notes</h2>
    {s.activeQuestionMaster&&<div className="flex gap-2 rounded-xl bg-fuchsia-600/10 p-3"><ScrollText size={16} className="mt-0.5 shrink-0 text-fuchsia-400"/><span><b>Question master: {nm(s.activeQuestionMaster)}</b><br/>Anyone who answers their questions drinks 3 sips. Stays until another Jack is drawn.</span></div>}
    <section className="space-y-2"><h3 className="font-bold text-fuchsia-300">Rules</h3>
@@ -29,11 +29,11 @@ export default function CheersGame({players,kingMode,onExit,onRestart}:{players:
    </section>
   </aside>
   <main className="order-1 mx-auto flex min-h-screen w-full max-w-md flex-col gap-4 lg:order-2 lg:mx-0 lg:flex-1">
-  <div className="flex items-center justify-between text-sm text-zinc-400"><button aria-label="Quit" onClick={()=>window.confirm('Quit this game?')&&onExit()} className="p-2"><X/></button>
-   <span>{s.deck.length} cards left</span><span className="rounded-full bg-fuchsia-600/30 px-3 py-1 font-bold text-fuchsia-300">KING {s.kingCount} / 4</span></div>
-  <div className="text-center"><p className="text-xs uppercase tracking-widest text-zinc-500">Current player</p><h1 className="text-5xl font-black">{nm(cur)}</h1></div>
+  <div className="flex items-center justify-between text-base text-zinc-400"><button aria-label="Quit" onClick={()=>window.confirm('Quit this game?')&&onExit()} className="p-2"><X/></button>
+   <span>{s.deck.length} cards left</span><span className="whitespace-nowrap rounded-full bg-fuchsia-600/30 px-2 py-1 text-xs font-bold text-fuchsia-300 sm:px-3 sm:text-sm">KING {s.kingCount}/4 <span className="mx-1 text-fuchsia-300/60">·</span> WATERFALL {s.aceCount}/4</span></div>
+  <div className="text-center"><p className="text-sm uppercase tracking-widest text-zinc-500">Current player</p><h1 className="text-5xl font-black">{nm(cur)}</h1></div>
   <PlayingCard card={s.currentCard}/>
-  {info&&<p className="text-center"><b className="text-2xl text-fuchsia-300">{info.name}</b><br/><span className="text-sm text-zinc-400">{info.text}</span></p>}
+  {info&&<p className="text-center"><b className="text-2xl text-fuchsia-300">{info.name}</b><br/><span className="text-base leading-relaxed text-zinc-300">{info.text}</span></p>}
   {s.event?<Events s={s} set={setS} done={done} nm={nm}/>:<Btn onClick={()=>setS(drawCard)}>Draw card</Btn>}
   <div className="mt-auto"><Reminder/></div>
   </main>

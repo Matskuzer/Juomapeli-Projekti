@@ -20,7 +20,7 @@ export default function App(){
  if(screen==='privacy')return <PrivacyPolicy onBack={()=>setScreen('home')}/>;
  if(screen==='game'&&selectedGame==='bus')return <BusDriverGame key={run} players={players} onExit={()=>setScreen('setup')}/>;
  if(screen==='game'&&selectedGame==='case')return <CaseOpeningGame onExit={()=>setScreen('home')}/>;
- if(screen==='setup')return <Setup players={players} setPlayers={setPlayers} kingMode={kingMode} setKingMode={setKingMode} minPlayers={selectedGame==='cheers'?3:selectedGame==='bus'?1:2} maxPlayers={selectedGame==='bus'?6:undefined} showGender={selectedGame==='cheers'} showKingOptions={selectedGame==='cheers'} onBack={()=>setScreen('home')} onPlay={()=>{setRun(r=>r+1);setScreen('game');}}/>;
+ if(screen==='setup')return <Setup players={players} setPlayers={setPlayers} kingMode={kingMode} setKingMode={setKingMode} minPlayers={selectedGame==='cheers'?3:selectedGame==='bus'?1:2} maxPlayers={selectedGame==='bus'?6:undefined} showGender={false} showKingOptions={selectedGame==='cheers'} showTurnOrderHint={selectedGame==='cheers'} onBack={()=>setScreen('home')} onPlay={()=>{setRun(r=>r+1);setScreen('game');}}/>;
  if(selectedGame==='ravit')return <RavitGame key={run} players={players} onExit={()=>setScreen('setup')} onRestart={()=>setRun(r=>r+1)}/>;
  if(selectedGame==='higher-lower')return <HigherLowerGame key={run} players={players} onExit={()=>setScreen('setup')} onRestart={()=>setRun(r=>r+1)}/>;
  return <CheersGame key={run} players={players} kingMode={kingMode} onExit={()=>setScreen('setup')} onRestart={()=>setRun(r=>r+1)}/>;

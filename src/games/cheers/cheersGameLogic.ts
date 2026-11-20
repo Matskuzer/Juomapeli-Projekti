@@ -3,14 +3,14 @@ import {eventFor} from './cheersRules';
 import type {GameState,GameEvent,Player,KingMode} from './cheersTypes';
 export const MIN_PLAYERS=3;
 export function createGame(players:Player[],rnd:()=>number=Math.random,kingMode:KingMode='cup'):GameState{
- return {players,playerOrder:shuffle(players.map(p=>p.id),rnd),turn:0,deck:shuffle(createDeck(),rnd),usedCards:[],currentCard:null,activeRules:[],activePartners:[],activeQuestionMaster:null,kingMode,status:'playing',kingCount:0,reactionTimes:{},event:null};
+ return {players,playerOrder:players.map(p=>p.id),turn:0,deck:shuffle(createDeck(),rnd),usedCards:[],currentCard:null,activeRules:[],activePartners:[],activeQuestionMaster:null,kingMode,status:'playing',kingCount:0,aceCount:0,reactionTimes:{},event:null};
 }
 export const currentPlayerId=(s:GameState)=>s.playerOrder[s.turn%s.playerOrder.length];
 export const orderedFrom=(s:GameState)=>s.playerOrder.map((_,i)=>s.playerOrder[(s.turn+i)%s.playerOrder.length]);
 export function drawCard(s:GameState):GameState{
  if(s.status!=='playing'||s.event||!s.deck.length)return s;
  const [card,...deck]=s.deck;
- const n:GameState={...s,deck,usedCards:[...s.usedCards,card],currentCard:card,activeQuestionMaster:card.rank==='J'?currentPlayerId(s):s.activeQuestionMaster,kingCount:s.kingCount+(card.rank==='K'?1:0),reactionTimes:{}};
+ const n:GameState={...s,deck,usedCards:[...s.usedCards,card],currentCard:card,activeQuestionMaster:card.rank==='J'?currentPlayerId(s):s.activeQuestionMaster,kingCount:s.kingCount+(card.rank==='K'?1:0),aceCount:s.aceCount+(card.rank==='A'?1:0),reactionTimes:{}};
  return {...n,event:eventFor(n,currentPlayerId(n))};
 }
 export const setEvent=(s:GameState,event:GameEvent|null):GameState=>({...s,event});

@@ -2,9 +2,28 @@ import {describe,it,expect} from 'vitest';
 import {createDeck} from './cheersCards';
 import {createGame,drawCard,endEvent,setPartner,canPick,currentPlayerId,addRule,rankReactions} from './cheersGameLogic';
 import {eventFor,withPartners} from './cheersRules';
+import type {GameState} from './cheersTypes';
 const ps=['a','b','c'].map(n=>({id:n,name:n,gender:'unspecified' as const}));
 describe('Cheers logic',()=>{
  it('deck has 52 unique cards',()=>{const d=createDeck();expect(d.length).toBe(52);expect(new Set(d.map(c=>c.id)).size).toBe(52);});
+ it('starts with the first added player and rotates in entry order',()=>{
+  const g=createGame(ps,()=>0);
+  expect(g.playerOrder).toEqual(['a','b','c']);
+  expect(currentPlayerId(g)).toBe('a');
+  expect(currentPlayerId(endEvent(g))).toBe('b');
+  expect(currentPlayerId(endEvent(endEvent(g)))).toBe('c');
+ });
+ it('counts drawn Aces separately from Kings',()=>{
+  const ace={id:'A♠',rank:'A' as const,suit:'♠' as const};
+  const king={id:'K♠',rank:'K' as const,suit:'♠' as const};
+  let g:GameState={...createGame(ps,()=>0),deck:[ace,king]};
+  g=drawCard(g);
+  expect(g.aceCount).toBe(1);
+  expect(g.kingCount).toBe(0);
+  g=drawCard(endEvent(g));
+  expect(g.aceCount).toBe(1);
+  expect(g.kingCount).toBe(1);
+ });
  it('drawing removes a card',()=>{const g=drawCard(createGame(ps));expect(g.deck.length).toBe(51);expect(g.deck.find(c=>c.id===g.currentCard!.id)).toBeUndefined();});
  it('turns rotate; game ends after 52 unique cards',()=>{let g=createGame(ps);const seen=new Set<string>();for(let i=0;i<52;i++){const first=currentPlayerId(g);g=drawCard(g);seen.add(g.currentCard!.id);g=endEvent(g);if(i<51)expect(currentPlayerId(g)).not.toBe(first);}expect(seen.size).toBe(52);expect(g.status).toBe('over');});
  it('counts kings',()=>{let g=createGame(ps);while(g.kingCount<4&&g.deck.length){g=endEvent(drawCard(g));}expect(g.kingCount).toBe(4);});

@@ -22,5 +22,5 @@ export interface GameState{
  players:Player[];playerOrder:string[];turn:number;deck:Card[];usedCards:Card[];
  currentCard:Card|null;activeRules:string[];activePartners:[string,string][];
  activeQuestionMaster:string|null;kingMode:KingMode;
- status:'playing'|'over';kingCount:number;reactionTimes:Record<string,number>;event:GameEvent|null;
+ status:'playing'|'over';kingCount:number;aceCount:number;reactionTimes:Record<string,number>;event:GameEvent|null;
 }
